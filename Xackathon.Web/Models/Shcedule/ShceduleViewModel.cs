@@ -1,4 +1,4 @@
-﻿namespace Xackathon.Models
+﻿namespace Xackathon.Web.Models
 {
     public class ShceduleViewModel
     {

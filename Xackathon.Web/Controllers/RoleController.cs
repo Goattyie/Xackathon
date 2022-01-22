@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Xackathon.Bll;
+using Xackathon.Bll.Model;
+using Xackathon.Web.Models;
 
 namespace Xackathon.Web.Controllers
 {
@@ -7,34 +9,47 @@ namespace Xackathon.Web.Controllers
     [ApiController]
     public class RoleController : ControllerBase
     {
-        [HttpGet("{roleId}")]
-        public IActionResult GetRole(long roleId)
+        private readonly Services _services;
+
+        public RoleController(Services services)
         {
-            return BadRequest();
+            _services = services;
+        }
+
+        [HttpGet("{roleId}")]
+        public async Task<IActionResult> GetRole(long roleId)
+        {
+            var role = await _services.RoleService.GetRole(roleId);
+            return Ok(role);
         }
 
         [HttpPut("{roleId}")]
-        public IActionResult PutRole(long roleId)
+        public async Task<IActionResult> PutRole(long roleId, [FromBody] RoleForm model)
         {
-            return BadRequest();
+            var domainModel = await _services.RoleService.UpdateRole(roleId, (RoleDomainModel)model);
+            return Ok(domainModel);
         }
 
         [HttpDelete("{roleId}")]
-        public IActionResult DeleteRole(long roleId)
+        public async Task<IActionResult> DeleteRole(long roleId)
         {
-            return BadRequest();
+            var domainModel = await _services.RoleService.DeleteRole(roleId);
+            return Ok(domainModel);
         }
 
         [HttpGet]
         public IActionResult Get()
         {
-            return BadRequest();
+            var roles = _services.RoleService.Get();
+            var viewModel = roles.ToRoleViewModel();
+            return Ok(viewModel);
         }
 
         [HttpPost]
-        public IActionResult Post()
+        public async Task<IActionResult> Post([FromBody] RoleForm model)
         {
-            return BadRequest();
+            var domainModel = await _services.RoleService.Create((RoleDomainModel)model);
+            return Ok(domainModel);
         }
     }
 }
