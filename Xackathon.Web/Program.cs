@@ -10,6 +10,8 @@ builder.Services.AddControllers();
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Xackathon API", Version = "v1" });
+    var filePath = Path.Combine(System.AppContext.BaseDirectory, "documentation.xml");
+    c.IncludeXmlComments(filePath);
 });
 
 var connection = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -19,14 +21,18 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseExceptionHandler("/error");
 app.UseSwaggerUI(c => c.SwaggerEndpoint("v1/swagger.json", "Xackathon API"));
-app.UseExceptionHandler(c => c.Run(async context =>
+
+if (app.Environment.IsProduction())
 {
-    var exception = context.Features
-        .Get<IExceptionHandlerPathFeature>()
-        .Error;
-    var response = new { error = exception.Message };
-    await context.Response.WriteAsJsonAsync(response);
-}));
+    app.UseExceptionHandler(c => c.Run(async context =>
+    {
+        var exception = context.Features
+            .Get<IExceptionHandlerPathFeature>()
+            .Error;
+        var response = new { error = exception.Message };
+        await context.Response.WriteAsJsonAsync(response);
+    }));
+}
 
 app.MapControllers();
 

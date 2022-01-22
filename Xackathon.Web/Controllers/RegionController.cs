@@ -1,5 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Xackathon.Bll;
+using Xackathon.Bll.Model;
+using Xackathon.Bll.Service;
+using Xackathon.Web.Models;
 
 namespace Xackathon.Web.Controllers
 {
@@ -7,34 +11,49 @@ namespace Xackathon.Web.Controllers
     [ApiController]
     public class RegionController : ControllerBase
     {
-        [HttpGet("{regionId}")]
-        public IActionResult GetRegion(long regionId)
+        private readonly IRegionService _service;
+
+        public RegionController(IRegionService service)
         {
-            return BadRequest();
+            _service = service;
+        }
+        [HttpGet("{regionId}")]
+        public async Task<IActionResult> GetRegion(long regionId)
+        {
+            var region = await _service.GetById(regionId);
+
+            return Ok(region);
         }
 
         [HttpPut("{regionId}")]
-        public IActionResult PutRegion(long regionId)
+        public async Task<IActionResult> PutRegion(long regionId, [FromBody] RegionForm form)
         {
-            return BadRequest();
+            var region = await _service.Update(regionId, (RegionDomainModel)form);
+
+            return Ok(region);
         }
 
         [HttpDelete("{regionId}")]
-        public IActionResult DeleteRegion(long regionId)
+        public async Task<IActionResult> DeleteRegion(long regionId)
         {
-            return BadRequest();
+            var region = await _service.Delete(regionId);
+
+            return Ok(region);
         }
 
         [HttpGet]
         public IActionResult Get()
         {
-            return BadRequest();
+            var regions = _service.Get();
+            return Ok(regions);
         }
 
         [HttpPost]
-        public IActionResult Post()
+        public async Task<IActionResult> Post([FromBody] RegionForm form)
         {
-            return BadRequest();
+            var region = await _service.Create((RegionDomainModel)form);
+
+            return Ok(region);
         }
     }
 }

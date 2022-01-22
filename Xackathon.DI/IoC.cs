@@ -15,8 +15,10 @@ namespace Xackathon.DI
             services.AddDbContext<SqlContext>(options => options.UseNpgsql(dbConnection));
 
             services.AddScoped<IRepository<Role>, RoleRepository>();
+            services.AddScoped<IRepository<Region>, RegionRepository>();
 
             services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<IRegionService, RegionService>();
             services.AddScoped<Services>();
         }
     }

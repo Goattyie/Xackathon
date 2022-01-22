@@ -12,9 +12,9 @@ namespace Xackathon.Bll
                 Id = x.Id,
                 Slug = x.MnemonicName,
                 Title = x.Title,
-                CreatedAt = x.CreatedAt.ToString(),
-                DeletedAt = x.DeletedAt.ToString(),
-                UpdatedAt = x.UpdatedAt.ToString()
+                CreatedAt = x.CreatedAt.ToFormatString(),
+                DeletedAt = x.DeletedAt.ToFormatString(),
+                UpdatedAt = x.UpdatedAt.ToFormatString()
             });
         }
 
@@ -28,9 +28,39 @@ namespace Xackathon.Bll
                 Id = model.Id,
                 Slug = model.MnemonicName,
                 Title = model.Title,
-                CreatedAt = model.CreatedAt.ToString(),
-                DeletedAt = model.DeletedAt.ToString(),
-                UpdatedAt = model.UpdatedAt.ToString()
+                CreatedAt = model.CreatedAt.ToFormatString(),
+                DeletedAt = model.DeletedAt.ToFormatString(),
+                UpdatedAt = model.UpdatedAt.ToFormatString()
+            };
+        }
+
+        public static IEnumerable<RegionDomainModel> ToRegionDomainArray(this IEnumerable<Region> model)
+        {
+            return model.Select(x => new RegionDomainModel
+            {
+                Id = x.Id,
+                Title = x.Title,
+                IsActive = x.IsActive,
+                Positions = x.Positions,
+                CreatedAt = x.CreatedAt.ToFormatString(),
+                DeletedAt = x.DeletedAt.ToFormatString(),
+                UpdatedAt = x.UpdatedAt.ToFormatString()
+            });
+        }
+        public static RegionDomainModel ToRegionDomain(this Region model)
+        {
+            if (model == null)
+                throw new Exception(Resources.Errors.ObjectNotFound);
+
+            return new RegionDomainModel
+            {
+                Id = model.Id,
+                Title = model.Title,
+                IsActive = model.IsActive,
+                Positions = model.Positions,
+                CreatedAt = model.CreatedAt.ToFormatString(),
+                DeletedAt = model.DeletedAt.ToFormatString(),
+                UpdatedAt = model.UpdatedAt.ToFormatString()
             };
         }
     }

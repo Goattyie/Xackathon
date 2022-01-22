@@ -61,6 +61,15 @@ namespace Xackathon.Bll.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to date is not valid.
+        /// </summary>
+        internal static string DateNotValid {
+            get {
+                return ResourceManager.GetString("DateNotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to object not found.
         /// </summary>
         internal static string ObjectNotFound {
