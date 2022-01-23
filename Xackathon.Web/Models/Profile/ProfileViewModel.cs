@@ -7,7 +7,7 @@
         public string Name { get; set; }
         public int Rating { get; set; }
         public string Email { get; set; }
-        public IEnumerable<RequestViewModel> Requests { get; set; }
+        public IEnumerable<RequestObjectViewModel> Requests { get; set; }
         public IEnumerable<StoredRequestViewModel> StoredRequests { get; set; }
         public bool IsNotificationSms { get; set; }
         public bool IsAnonymousRequests { get; set; }

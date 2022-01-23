@@ -1,8 +1,8 @@
-﻿using Xackathon.Bll.Model;
+﻿using Xackathon.Dal.Models;
 
-namespace Xackathon.Web.Models
+namespace Xackathon.Bll.Model
 {
-    public class ProblemCategoryViewModel
+    public class ProblemCategoryDomainModel
     {
         public long Id { get; set; }
         public string Title { get; set; }
@@ -12,16 +12,13 @@ namespace Xackathon.Web.Models
         public int Rating { get; set; }
         public bool IsActive { get; set; }
         public bool IsVisible { get; set; }
-        /// <example>2022-10-01 16:32:00</example>
         public string DeletedAt { get; set; }
-        /// <example>2022-10-01 16:32:00</example>
         public string CreatedAt { get; set; }
-        /// <example>2022-10-01 16:32:00</example>
         public string UpdatedAt { get; set; }
-
-        public static explicit operator ProblemCategoryDomainModel(ProblemCategoryViewModel obj)
+    
+        public static explicit operator ProblemCategory(ProblemCategoryDomainModel obj)
         {
-            return new ProblemCategoryDomainModel
+            return new ProblemCategory
             {
                 Id = obj.Id,
                 Title = obj.Title,
@@ -30,10 +27,12 @@ namespace Xackathon.Web.Models
                 Icon = obj.Icon,
                 Rating = obj.Rating,
                 IsActive = obj.IsActive,
-                CreatedAt = obj.CreatedAt,
-                UpdatedAt = obj.UpdatedAt,
-                DeletedAt = obj.DeletedAt,
+                IsVisible = obj.IsVisible,
+                CreatedAt = obj.CreatedAt.ToDateTime(),
+                DeletedAt = obj.DeletedAt.ToDateTime(),
+                UpdatedAt = obj.UpdatedAt.ToDateTime(),
+
             };
-        } 
+        }
     }
 }

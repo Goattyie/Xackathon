@@ -45,7 +45,9 @@ namespace Xackathon.Web.Controllers
         public IActionResult Get()
         {
             var regions = _service.Get();
-            return Ok(regions);
+            var viewModel = regions.ToRegionViewModel();
+
+            return Ok(viewModel);
         }
 
         [HttpPost]

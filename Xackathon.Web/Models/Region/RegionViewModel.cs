@@ -1,13 +1,10 @@
-﻿namespace Xackathon.Web.Models
+﻿using Xackathon.Bll.Model;
+
+namespace Xackathon.Web.Models
 {
     public class RegionViewModel
     {
-        public long Id { get; set; }
-        public string Title { get; set; }
-        public int Positions { get; set; }
-        public bool IsActive { get; set; }
-        public DateTime? DeletedAt { get; set; }
-        public DateTime? CreatedAt { get; set; }
-        public DateTime? UpdatedAt { get; set; }
+        public int Total { get; set; }
+        public IEnumerable<RegionDomainModel> Data { get; set; }
     }
 }

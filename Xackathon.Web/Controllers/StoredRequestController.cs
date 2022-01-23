@@ -5,7 +5,7 @@ namespace Xackathon.Web.Controllers
 {
     [Route("stored-requests")]
     [ApiController]
-    public class StoredRequest : ControllerBase
+    public class StoredRequestController : ControllerBase
     {
         [HttpGet("{storedRequestId}")]
         public IActionResult GetStoredRequest(long storedRequestId)

@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Xackathon.Bll.Model;
+using Xackathon.Bll.Service;
+using Xackathon.Web.Models;
 
 namespace Xackathon.Web.Controllers
 {
@@ -7,40 +10,58 @@ namespace Xackathon.Web.Controllers
     [ApiController]
     public class StoryController : ControllerBase
     {
-        [HttpGet("{storyId}")]
-        public IActionResult GetStory(long storyId)
+        private readonly IStoryService _service;
+
+        public StoryController(IStoryService service)
         {
-            return BadRequest();
+            _service = service;
+        }
+        [HttpGet("{storyId}")]
+        public async Task<IActionResult> GetStory(long storyId)
+        {
+            var domain = await _service.GetById(storyId);
+
+            return Ok(domain);
         }
 
         [HttpPut("{storyId}")]
-        public IActionResult PutStory(long storyId)
+        public async Task<IActionResult> PutStory(long storyId, [FromBody]StoryForm story)
         {
-            return BadRequest();
+            var domain = await _service.Update(storyId, (StoryDomainModel)story);
+            
+            return Ok(domain);
         }
 
         [HttpDelete("{storyId}")]
-        public IActionResult DeleteStory(long storyId)
+        public async Task<IActionResult> DeleteStory(long storyId)
         {
-            return BadRequest();
+            var domain = await _service.Delete(storyId);
+
+            return Ok(domain);
         }
 
         [HttpPost("{storyId}/watch")]
-        public IActionResult PostStory(long storyId)
+        public async Task<IActionResult> PostStory(long storyId)
         {
-            return BadRequest();
+            var domain = await _service.Watch(storyId);
+
+            return Ok(domain);
         }
 
         [HttpGet]
         public IActionResult Get()
         {
-            return BadRequest();
+            var list = _service.Get();
+
+            return Ok(list.ToStoryViewModel());
         }
 
         [HttpPost]
-        public IActionResult Post()
+        public async Task<IActionResult> Post([FromBody]StoryForm story)
         {
-            return BadRequest();
+            var domain = await _service.Create((StoryDomainModel)story);
+
+            return Ok(domain);
         }
     }
 }

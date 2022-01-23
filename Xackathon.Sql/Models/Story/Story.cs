@@ -21,7 +21,7 @@
         public ContentType ContentType { get; set; }
         public string ContentUrl { get; set; }
         public DateTime LiveTo { get; set; }
-        public byte SlideLength { get; set; }
+        public float Duration { get; set; }
         public StoryType StoryType { get; set; }
         public long ModeratorId { get; set; }
         public bool IsActive { get; set; }

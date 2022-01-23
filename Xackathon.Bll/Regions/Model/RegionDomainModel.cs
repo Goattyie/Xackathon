@@ -20,9 +20,9 @@ namespace Xackathon.Bll.Model
             region.Title = obj.Title;
             region.Positions = obj.Positions;
             region.IsActive = obj.IsActive;
-            region.DeletedAt = obj.DeletedAt.ToDateTime();
-            region.CreatedAt = obj.DeletedAt.ToDateTime();
-            region.UpdatedAt = obj.DeletedAt.ToDateTime();
+            region.DeletedAt = obj.DeletedAt.ToNullableDateTime();
+            region.CreatedAt = obj.DeletedAt.ToNullableDateTime();
+            region.UpdatedAt = obj.DeletedAt.ToNullableDateTime();
 
             return region;
         }

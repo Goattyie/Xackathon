@@ -18,9 +18,9 @@ namespace Xackathon.Bll.Model
                 Id = obj.Id,
                 Title = obj.Title,
                 MnemonicName = obj.Slug,
-                CreatedAt = obj.CreatedAt.ToDateTime(),
-                DeletedAt = obj.DeletedAt.ToDateTime(),
-                UpdatedAt = obj.UpdatedAt.ToDateTime(),
+                CreatedAt = obj.CreatedAt.ToNullableDateTime(),
+                DeletedAt = obj.DeletedAt.ToNullableDateTime(),
+                UpdatedAt = obj.UpdatedAt.ToNullableDateTime(),
             };
         }
     }
