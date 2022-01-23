@@ -19,12 +19,14 @@ namespace Xackathon.DI
             services.AddScoped<IProblemCategoryRepository, ProblemCategoryRepository>();
             services.AddScoped<IRequestRepository, RequestRepository>();
             services.AddScoped<IRepository<Story>, StoryRepository>();
+            services.AddScoped<IRepository<User>, UserRepository>();
 
             services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<IRegionService, RegionService>();
             services.AddScoped<IProblemCategoryService, ProblemCategoryService>();
             services.AddScoped<IRequestService, RequestService>();
             services.AddScoped<IStoryService, StoryService>();
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<Services>();
         }
     }

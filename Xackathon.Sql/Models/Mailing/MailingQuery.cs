@@ -1,15 +1,7 @@
-﻿namespace Xackathon.Dal.Models
+﻿using Xackathon.Abstractions;
+
+namespace Xackathon.Dal.Models
 {
-    public enum MailingType
-    {
-        Phone,
-        Mail
-    }
-    public enum SendStatus
-    {
-        Success,
-        Failure
-    }
     public class MailingQuery
     {
         public long Id { get; set; }
@@ -22,5 +14,6 @@
         public DateTime? DeletedAt { get; set; }
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
+        public Request Request { get; set; }
     }
 }

@@ -1,5 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Xackathon.Bll.Model;
+using Xackathon.Bll.Service;
+using Xackathon.Dal.Models;
+using Xackathon.Sql.Repository;
+using Xackathon.Web.Models;
 
 namespace Xackathon.Web.Controllers
 {
@@ -7,22 +11,34 @@ namespace Xackathon.Web.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        [HttpGet("{userId}")]
-        public IActionResult GetUser(long userId)
+        private readonly IUserService _service;
+
+        public UserController(IUserService service)
         {
-            return BadRequest(userId);
+            _service = service;
+        }
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> GetUser(long userId)
+        {
+            var user = await _service.GetById(userId);
+
+            return Ok(user);
         }
 
         [HttpPut("{userId}")]
-        public IActionResult Put(long userId)
+        public async Task<IActionResult> Put(long userId, [FromBody] UserForm obj)
         {
-            return BadRequest(userId);
+            var user = await _service.Update(userId, (UserDomainModel)obj);
+
+            return Ok(user);
         }
 
         [HttpDelete("{userId}")]
-        public IActionResult Delete(long userId)
+        public async Task<IActionResult> Delete(long userId)
         {
-            return BadRequest(userId);
+            var user = await _service.Delete(userId);
+
+            return Ok(user);
         }
 
         [HttpGet("me")]
@@ -40,19 +56,25 @@ namespace Xackathon.Web.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return BadRequest();
+            var list = _service.Get();
+
+            return Ok(list);
         }
 
         [HttpPost]
-        public IActionResult Post()
+        public async Task<IActionResult> Post([FromBody]UserForm obj)
         {
-            return BadRequest();
+            var user = await _service.Create((UserDomainModel)obj);
+
+            return Ok(user);
         }
 
         [HttpPut("{userId}/roles")]
-        public IActionResult PutRoles(long userId)
+        public async Task<IActionResult> PutRoles(long userId, [FromBody] IEnumerable<RoleDomainModel> obj)
         {
-            return BadRequest(userId);
+            var user = await _service.Update(userId, (UserDomainModel)obj);
+
+            return Ok(user);
         }
 
         [HttpGet("{userId}/blocked")]

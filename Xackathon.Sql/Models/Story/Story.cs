@@ -1,15 +1,8 @@
-﻿namespace Xackathon.Dal.Models
+﻿using System.Runtime.Serialization;
+using Xackathon.Abstractions;
+
+namespace Xackathon.Dal.Models
 {
-    public enum ContentType
-    {
-        Image,
-        Video
-    }
-    public enum StoryType
-    {
-        Information,
-        Danger
-    }
     public class Story
     {
         public long Id { get; set; }

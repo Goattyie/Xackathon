@@ -1,28 +1,8 @@
-﻿using Xackathon.Dal.Models;
+﻿using Xackathon.Abstractions;
+using Xackathon.Dal.Models;
 
 namespace Xackathon.Bll.Model
 {
-    public enum Source
-    {
-        Landing,
-        Vk,
-        Operator,
-        Excel,
-        Telegram,
-        Android,
-        Ios,
-        Other
-    }
-
-    public enum Status
-    {
-        InProcessing,
-        InConsideration,
-        InExecution,
-        InExecutionCheck,
-        Completed,
-        Archived,
-    }
     public class RequestDomainModel
     {
         public long Id { get; set; }
@@ -54,15 +34,15 @@ namespace Xackathon.Bll.Model
             return new Request
             {
                 Id = obj.Id,
-                UserId = obj.UserId,
+                ProfileId = obj.UserId,
                 ParentRequestId = obj.ParentRequestId,
                 Location = obj.Location,
                 Latitude = obj.Latitude,
                 Longitude = obj.Longitude,
                 MediaContentId = obj.MediaContentId,
                 Content = obj.Content,
-                Status = (Dal.Models.Status)obj.Status,
-                Source = (Dal.Models.Source)obj.Source,
+                Status = obj.Status,
+                Source = obj.Source,
                 BaseRating = obj.BaseRating,
                 WatchCount = obj.WatchCount,
                 RequestConsiderationAt = obj.RequestConsiderationAt.ToDateTime(),

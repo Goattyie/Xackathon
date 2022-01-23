@@ -13,5 +13,7 @@
         public DateTime? DeletedAt { get; set; }
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
+        public Profile Profile { get; set; }
+        public IEnumerable<Role> Roles { get; set; }
     }
 }

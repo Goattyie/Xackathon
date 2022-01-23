@@ -6,5 +6,7 @@
         public long RouteId { get; set; }
         public long UserId { get; set; }
         public DateTime WorkDate { get; set; }
+        public TransportRoutes Route { get; set; }
+        public User User { get; set; }
     }
 }

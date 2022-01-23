@@ -8,5 +8,7 @@
         public long Position { get; set; }
         public bool IsStart { get; set; }
         public bool IsEnd { get; set; }
+        public StoppingPoint StoppingPoint { get; set; }
+        public TransportRoutes TransportRoute { get; set; }
     }
 }

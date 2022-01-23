@@ -1,30 +1,11 @@
-﻿namespace Xackathon.Dal.Models
-{
-    public enum Source
-    {
-        Landing,
-        Vk,
-        Operator,
-        Excel,
-        Telegram,
-        Android,
-        Ios,
-        Other
-    }
+﻿using Xackathon.Abstractions;
 
-    public enum Status
-    {
-        InProcessing,
-        InConsideration,
-        InExecution,
-        InExecutionCheck,
-        Completed,
-        Archived,
-    }
+namespace Xackathon.Dal.Models
+{
     public class Request
     {
         public long Id { get; set; }
-        public long UserId { get; set; }
+        public long ProfileId { get; set; }
         public long? ParentRequestId { get; set; }
         public string Location { get; set; }
         public float Latitude { get; set; }
@@ -46,6 +27,8 @@
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public int ViewCount { get; set; }
-
+        public Profile Profile { get; set; }
+        public Request ParentRequest { get; set; }
+        public MediaContent MediaContent { get; set; }
     }
 }

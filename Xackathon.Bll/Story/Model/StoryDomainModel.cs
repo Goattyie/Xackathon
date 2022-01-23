@@ -1,4 +1,5 @@
-﻿using Xackathon.Dal.Models;
+﻿using Xackathon.Abstractions;
+using Xackathon.Dal.Models;
 
 namespace Xackathon.Bll.Model
 {

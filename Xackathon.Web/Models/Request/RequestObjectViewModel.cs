@@ -1,4 +1,5 @@
-﻿using Xackathon.Bll.Model;
+﻿using Xackathon.Abstractions;
+using Xackathon.Bll.Model;
 
 namespace Xackathon.Web.Models
 {

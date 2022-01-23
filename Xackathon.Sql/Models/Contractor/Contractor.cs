@@ -1,10 +1,7 @@
-﻿namespace Xackathon.Dal.Models
+﻿using Xackathon.Abstractions;
+
+namespace Xackathon.Dal.Models
 {
-    public enum OrganizationType
-    {
-        Executive,
-        Supervising
-    }
     public class Contractor
     {
         public long Id { get; set; }

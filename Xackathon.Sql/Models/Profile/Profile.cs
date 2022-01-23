@@ -14,5 +14,9 @@
         public DateTime? DeletedAt { get; set; }
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
+        public User User { get; set; }
+        public int Rating { get; set; }
+        public IEnumerable<Request> Requests { get; set; }
+        public IEnumerable<StoredRequest> StoredRequests { get; set; }
     }
 }

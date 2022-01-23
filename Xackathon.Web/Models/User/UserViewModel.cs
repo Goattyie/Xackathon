@@ -9,11 +9,11 @@
         public IEnumerable<RoleViewModel> Roles { get; set; }
         public string ApproveSmsCode { get; set; }
         public string ApproveEmailCode { get; set; }
-        public DateTime? SmsApprovedAt { get; set; }
-        public DateTime? EmailApprovedAt { get; set; }
-        public DateTime? BlockedAt { get; set; }
-        public DateTime? DeletedAt { get; set; }
-        public DateTime? CreatedAt { get; set; }
-        public DateTime? UpdatedAt { get; set; }
+        public string SmsApprovedAt { get; set; }
+        public string EmailApprovedAt { get; set; }
+        public string BlockedAt { get; set; }
+        public string DeletedAt { get; set; }
+        public string CreatedAt { get; set; }
+        public string UpdatedAt { get; set; }
     }
 }

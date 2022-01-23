@@ -1,4 +1,6 @@
-﻿namespace Xackathon.Dal.Models
+﻿using Xackathon.Abstractions;
+
+namespace Xackathon.Dal.Models
 {
     public class ContractorRequest
     {
@@ -14,5 +16,7 @@
         public DateTime? WorkedAt { get; set; }
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
+        public Contractor Contractor { get; set; }
+        public Request Request { get; set; }
     }
 }

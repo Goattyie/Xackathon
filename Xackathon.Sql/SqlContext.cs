@@ -21,10 +21,8 @@ namespace Xackathon.Sql
         public DbSet<ContractorRequest> ContractorRequests { get; set; }
         public DbSet<ProblemCategoryRequest> ProblemCategoryRequests { get; set; }
         public DbSet<Request> Requests { get; set; }
-        public DbSet<RequestViews> RequestViews { get; set; }
         public DbSet<StoredRequest> StoredRequests { get; set; }
         public DbSet<Role> Roles { get; set; }
-        public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<Schedule> Schedules { get; set; }
         public DbSet<StoppingPoint> StoppingPoints { get; set; }
         public DbSet<StoppingRoutePoint> StoppingRoutePoints { get; set; }
