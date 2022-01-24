@@ -286,7 +286,7 @@ namespace Xackathon.Bll
                 CreatedAt = model.CreatedAt.ToFormatString(),
                 DeletedAt = model.DeletedAt.ToFormatString(),
                 Password = model.Password,
-                Roles = model.Roles.ToRoleDomainArray(),
+                Roles = model.Roles.ToRoleDomainArray() ?? Enumerable.Empty<RoleDomainModel>(),
                 Profile = model.Profile.ToProfileDomain(),
                 UpdatedAt = model.UpdatedAt.ToFormatString(),
                 Login = model.Login,
