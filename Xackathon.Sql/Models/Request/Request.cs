@@ -6,29 +6,16 @@ namespace Xackathon.Dal.Models
     {
         public long Id { get; set; }
         public long ProfileId { get; set; }
-        public long? ParentRequestId { get; set; }
         public string Location { get; set; }
         public float Latitude { get; set; }
         public float Longitude { get; set; }
-        public long MediaContentId { get; set; }
-        public string Content { get; set; }
-        public Status Status { get; set; }
+        public string Description { get; set; }
         public Source Source { get; set; }
-        public int BaseRating { get; set; }
         public int Rating { get; set; }
         public int WatchCount { get; set; }
-        public DateTime RequestConsiderationAt { get; set; }
-        public DateTime BeginRequestConsiderationAt { get; set; }
-        public DateTime CompleteRequestExecutionAt { get; set; }
-        public bool IsModerated { get; set; }
-        public long ModeratorId { get; set; }
-        public string ProblemDescription { get; set; }
-        public DateTime? DeletedAt { get; set; }
         public DateTime? CreatedAt { get; set; }
-        public DateTime? UpdatedAt { get; set; }
-        public int ViewCount { get; set; }
         public Profile Profile { get; set; }
-        public Request ParentRequest { get; set; }
-        public MediaContent MediaContent { get; set; }
+        public IEnumerable<MediaContent> MediaContent { get; set; }
+        public IEnumerable<ProblemCategory> ProblemCategories { get; set; }
     }
 }

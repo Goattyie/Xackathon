@@ -1,68 +1,68 @@
 ﻿using Xackathon.Bll.Model;
 using Xackathon.Dal.Models;
-using Xackathon.Sql.Repository;
+using Xackathon.Sql;
 
 namespace Xackathon.Bll.Service
 {
     public class RequestService : IRequestService
     {
-        private readonly IRequestRepository _db;
+        private readonly WorkRepositoryUnit _db;
 
-        public RequestService(IRequestRepository db)
+        public RequestService(WorkRepositoryUnit db)
         {
             _db = db;
         }
-        public async Task<RequestDomainModel> Create(RequestDomainModel obj)
+        public async Task<RequestDomainModel> Create(RequestFormDomainModel obj)
         {
-            var entity = (Request)obj;
+            var profile = (Profile)obj;
+            var request = (Request)obj;
+            var categories = new List<ProblemCategory>();
 
-            await _db.Create(entity);
+            foreach(var id in obj.ProblemCategories)
+            {
+                var problem = await _db.ProblemCategory.GetById(id);
 
-            return entity.ToRequestDomain();
+                if (problem == null)
+                    throw new Exception(Resources.Errors.ObjectNotFound + $": problemId {id}");
+
+                problem.Requests = new List<Request> { request };
+                categories.Add(problem);
+            }
+            foreach(var problem in categories)
+            {
+                await _db.ProblemCategory.Update(problem);
+            }
+
+            if((await _db.Profile.GetByPhone(profile.Phone)) == null)
+            {
+                await _db.Profile.Create(profile);
+            }
+
+            request.Profile = profile;
+            await _db.Request.Create(request);
+
+            return request.ToRequestDomain();
         }
 
         public async Task<RequestDomainModel> Delete(long id)
         {
-            var entity = await _db.GetById(id);
-
-            if (entity == null)
-                throw new Exception(Resources.Errors.ObjectNotFound);
-
-            await _db.Delete(entity);
-
-            return entity.ToRequestDomain();
+            throw new NotImplementedException();
         }
 
         public IEnumerable<RequestDomainModel> Get()
         {
-            var list = _db.Get();
-
-            return list.ToRequestDomainArray();
+            return _db.Request.Get().ToRequestDomainArray();
         }
 
         public async Task<RequestDomainModel> GetById(long id)
         {
-            var entity = await _db.GetById(id);
-
-            if (entity == null)
-                throw new Exception(Resources.Errors.ObjectNotFound);
-
-            return entity.ToRequestDomain();
+            var domain = await _db.Request.GetById(id);
+            return domain.ToRequestDomain();
         }
 
         public async Task<RequestDomainModel> Update(long id, RequestDomainModel obj)
         {
-            var entity = await _db.GetById(id);
-
-            if (entity == null)
-                throw new Exception(Resources.Errors.ObjectNotFound);
-
-            obj.Id = id;
-            var updateEntity = (Request)obj;
-
-            await _db.Update(updateEntity);
-
-            return updateEntity.ToRequestDomain();
+            throw new NotImplementedException();
         }
     }
 }

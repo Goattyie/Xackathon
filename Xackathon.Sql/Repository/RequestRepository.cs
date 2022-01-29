@@ -1,4 +1,5 @@
-﻿using Xackathon.Dal.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using Xackathon.Dal.Models;
 
 namespace Xackathon.Sql.Repository
 {
@@ -24,12 +25,12 @@ namespace Xackathon.Sql.Repository
 
         public IEnumerable<Request> Get()
         {
-            return _db.Requests;
+            return _db.Requests.Include(x => x.Profile).Include(x => x.ProblemCategories);
         }
 
         public async Task<Request> GetById(long id)
         {
-            var entity = await _db.Requests.FindAsync(id);
+            var entity = await _db.Requests.Include(x=>x.Profile).Include(x=>x.ProblemCategories).FirstOrDefaultAsync(x=>x.Id == id);
 
             if (entity != null)
                 _db.Entry(entity).State = Microsoft.EntityFrameworkCore.EntityState.Detached;

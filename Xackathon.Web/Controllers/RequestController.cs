@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Xackathon.Bll.Model;
+using Xackathon.Bll.Service;
+using Xackathon.Web.Models;
 
 namespace Xackathon.Web.Controllers
 {
@@ -7,10 +10,18 @@ namespace Xackathon.Web.Controllers
     [ApiController]
     public class RequestController : ControllerBase
     {
-        [HttpGet("{requestId}")]
-        public IActionResult GetRequest(long requestId)
+        private readonly IRequestService _service;
+
+        public RequestController(IRequestService service)
         {
-            return BadRequest(requestId);
+            _service = service;
+        }
+        [HttpGet("{requestId}")]
+        public async Task<IActionResult> GetRequest(long requestId)
+        {
+            var request = await _service.GetById(requestId);
+
+            return Ok(request.ToViewModel());
         }
 
         [HttpPut("{requestId}")]
@@ -28,31 +39,19 @@ namespace Xackathon.Web.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return BadRequest();
+            var list = _service.Get();
+            var viewModelList = list.ToViewModel();
+            var viewModel = viewModelList.ToViewModelList();
+
+            return Ok(viewModel);
         }
 
         [HttpPost]
-        public IActionResult Post()
+        public async Task<IActionResult> Post([FromBody]RequestForm obj)
         {
-            return BadRequest();
-        }
+            var request = await _service.Create((RequestFormDomainModel)obj);
 
-        [HttpPost("in-range")]
-        public IActionResult PostInRange()
-        {
-            return BadRequest();
-        }
-
-        [HttpPost("rating")]
-        public IActionResult PostRating()
-        {
-            return BadRequest();
-        }
-
-        [HttpGet("{requestId}/pdf")]
-        public IActionResult GetRequestInPdf(long requestId)
-        {
-            return BadRequest(requestId);
+            return Ok(request);
         }
 
         [HttpGet("{requestId}/watch")]

@@ -27,16 +27,6 @@ namespace Xackathon.Sql.Repository
             return _db.ProblemCategories;
         }
 
-        public IEnumerable<ProblemCategory> GetActiveRequests()
-        {
-            return _db.ProblemCategories.Where(x => x.IsActive);
-        }
-
-        public IEnumerable<ProblemCategory> GetArchiveRequests()
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<ProblemCategory> GetById(long id)
         {
             var entity = await _db.ProblemCategories.FindAsync(id);
@@ -45,11 +35,6 @@ namespace Xackathon.Sql.Repository
                 _db.Entry(entity).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
 
             return entity;
-        }
-
-        public IEnumerable<ProblemCategory> GetCompletedRequests()
-        {
-            throw new NotImplementedException();
         }
 
         public async Task Update(ProblemCategory obj)

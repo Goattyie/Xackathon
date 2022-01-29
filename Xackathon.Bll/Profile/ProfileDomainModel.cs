@@ -1,10 +1,9 @@
-﻿namespace Xackathon.Dal.Models
+﻿namespace Xackathon.Bll.Model
 {
-    public class Profile
+    public class ProfileDomainModel
     {
         public long Id { get; set; }
         public string Name { get; set; }
         public string Phone { get; set; }
-        public IEnumerable<Request> Requests { get; set; }
     }
 }

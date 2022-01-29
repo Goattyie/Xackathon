@@ -4,30 +4,59 @@ namespace Xackathon.Web.Models
 {
     public static class ViewModelHelper
     {
-        public static RoleViewModel ToRoleViewModel(this IEnumerable<RoleDomainModel> obj)
+        public static ProblemCategoryViewModelList ToViewModelList(this IEnumerable<ProblemCategoryViewModel> model)
         {
-            return new RoleViewModel
+            return new ProblemCategoryViewModelList
             {
-                Total = obj.Count(),
-                Data = obj
-            };
-        }
-        public static RegionViewModel ToRegionViewModel(this IEnumerable<RegionDomainModel> obj)
-        {
-            return new RegionViewModel
-            {
-                Total = obj.Count(),
-                Data = obj
+                Total = model.Count(),
+                Data = model
             };
         }
 
-        public static StoryViewModel ToStoryViewModel(this IEnumerable<StoryDomainModel> obj)
+        public static RequestViewModel ToViewModel(this RequestDomainModel model)
         {
-            var viewModel = new StoryViewModel();
-            viewModel.Total = obj.Count();
-            viewModel.Data = obj;
-            
-            return viewModel;
+            return new RequestViewModel
+            {
+                Id = model.Id,
+                Profile = Auto.Mapper.Map<ProfileViewModel>(model.Profile),
+                Description = model.Description,
+                CreatedAt = model.CreatedAt,
+                Latitude = model.Latitude,
+                Location = model.Location,
+                Longitude = model.Longitude,
+                MediaContent = Auto.Mapper.Map<IEnumerable<MediaContentViewModel>>(model.MediaContent),
+                ProblemCategories = Auto.Mapper.Map<IEnumerable<ProblemCategoryViewModel>>(model.ProblemCategories),
+                Rating = model.Rating,
+                Source = model.Source.ToString(),
+                WatchCount = model.WatchCount,
+            };
+        }
+        public static IEnumerable<RequestViewModel> ToViewModel(this IEnumerable<RequestDomainModel> list)
+        {
+            return list.Select(model => new RequestViewModel
+            {
+                Id = model.Id,
+                Profile = Auto.Mapper.Map<ProfileViewModel>(model.Profile),
+                Description = model.Description,
+                CreatedAt = model.CreatedAt,
+                Latitude = model.Latitude,
+                Location = model.Location,
+                Longitude = model.Longitude,
+                MediaContent = Auto.Mapper.Map<IEnumerable<MediaContentViewModel>>(model.MediaContent),
+                ProblemCategories = Auto.Mapper.Map<IEnumerable<ProblemCategoryViewModel>>(model.ProblemCategories),
+                Rating = model.Rating,
+                Source = model.Source.ToString(),
+                WatchCount = model.WatchCount,
+            });
+        }
+
+        public static RequestViewModelList ToViewModelList(this IEnumerable<RequestViewModel> model)
+        {
+            return new RequestViewModelList
+            {
+                Total = model.Count(),
+                Data = model
+            };
         }
     }
 }

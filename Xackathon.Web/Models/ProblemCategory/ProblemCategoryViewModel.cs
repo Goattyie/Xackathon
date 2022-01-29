@@ -2,6 +2,12 @@
 
 namespace Xackathon.Web.Models
 {
+    public class ProblemCategoryViewModelList
+    {
+        public int Total { get; set; }
+        public IEnumerable<ProblemCategoryViewModel> Data { get; set; }
+    }
+
     public class ProblemCategoryViewModel
     {
         public long Id { get; set; }
@@ -10,14 +16,7 @@ namespace Xackathon.Web.Models
         public string HashTag { get; set; }
         public string Icon { get; set; }
         public int Rating { get; set; }
-        public bool IsActive { get; set; }
-        public bool IsVisible { get; set; }
-        /// <example>2022-10-01 16:32:00</example>
-        public string DeletedAt { get; set; }
-        /// <example>2022-10-01 16:32:00</example>
         public string CreatedAt { get; set; }
-        /// <example>2022-10-01 16:32:00</example>
-        public string UpdatedAt { get; set; }
 
         public static explicit operator ProblemCategoryDomainModel(ProblemCategoryViewModel obj)
         {
@@ -29,11 +28,8 @@ namespace Xackathon.Web.Models
                 HashTag = obj.HashTag,
                 Icon = obj.Icon,
                 Rating = obj.Rating,
-                IsActive = obj.IsActive,
                 CreatedAt = obj.CreatedAt,
-                UpdatedAt = obj.UpdatedAt,
-                DeletedAt = obj.DeletedAt,
             };
-        } 
+        }
     }
 }

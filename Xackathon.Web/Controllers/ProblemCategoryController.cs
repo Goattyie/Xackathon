@@ -45,8 +45,9 @@ namespace Xackathon.Web.Controllers
         public IActionResult Get()
         {
             var problems = _db.Get();
+            var viewModelList = Auto.Mapper.Map<IEnumerable<ProblemCategoryViewModel>>(problems);
 
-            return Ok(problems);
+            return Ok(viewModelList.ToViewModelList());
         }
 
         [HttpPost]
@@ -57,24 +58,6 @@ namespace Xackathon.Web.Controllers
             var newDomain = await _db.Create(domain);
 
             return Ok(newDomain);
-        }
-
-        [HttpGet("{problemCategoryId}/active-request")]
-        public IActionResult GetCategoryActiveRequest(long problemCategoryId) 
-        {
-            return BadRequest();
-        }
-
-        [HttpGet("{problemCategoryId}/completed-request")]
-        public IActionResult GetCategoryCompletedRequest(long problemCategoryId)
-        {
-            return BadRequest();
-        }
-
-        [HttpGet("{problemCategoryId}/archive-request")]
-        public IActionResult GetCategoryArchiveRequest(long problemCategoryId)
-        {
-            return BadRequest();
         }
     }
 }
