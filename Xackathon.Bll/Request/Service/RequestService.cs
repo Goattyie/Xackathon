@@ -38,6 +38,19 @@ namespace Xackathon.Bll.Service
                 await _db.Profile.Create(profile);
             }
 
+            request.Rating = 80;
+            if (request.Latitude != 0 || request.Longitude != 0)
+                request.Rating += 20;
+
+            if (!string.IsNullOrEmpty(request.Description))
+                request.Rating += 10;
+
+            if (request.MediaContent?.Count() > 0)
+                request.Rating += 20;
+
+            if (categories.Count > 0)
+                request.Rating += 5;
+
             request.Profile = profile;
             await _db.Request.Create(request);
 

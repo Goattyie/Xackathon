@@ -44,6 +44,7 @@ namespace Xackathon.Web.Models
         /// </summary>
         /// <example>Авария на перекрестке</example>
         public string Description { get; set; }
+        public string Email { get; set; }
 
         public static explicit operator RequestFormDomainModel(RequestForm form)
         {
@@ -52,6 +53,7 @@ namespace Xackathon.Web.Models
             domainModel.Phone = form.Phone;
             domainModel.Location = form.Location;
             domainModel.Latitude = form.Latitude;
+            domainModel.Email = form.Email;
             domainModel.Longitude = form.Longitude;
             domainModel.Description = form.Description;
             domainModel.Content = Auto.Mapper.Map<IEnumerable<MediaContentDomainModel>>(form.Content);

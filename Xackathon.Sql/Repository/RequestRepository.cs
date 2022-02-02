@@ -25,12 +25,12 @@ namespace Xackathon.Sql.Repository
 
         public IEnumerable<Request> Get()
         {
-            return _db.Requests.Include(x => x.Profile).Include(x => x.ProblemCategories);
+            return _db.Requests.Include(x => x.Profile).Include(x => x.ProblemCategories).Include(x=>x.MediaContent);
         }
 
         public async Task<Request> GetById(long id)
         {
-            var entity = await _db.Requests.Include(x=>x.Profile).Include(x=>x.ProblemCategories).FirstOrDefaultAsync(x=>x.Id == id);
+            var entity = await _db.Requests.Include(x=>x.Profile).Include(x=>x.ProblemCategories).Include(x => x.MediaContent).FirstOrDefaultAsync(x=>x.Id == id);
 
             if (entity != null)
                 _db.Entry(entity).State = Microsoft.EntityFrameworkCore.EntityState.Detached;

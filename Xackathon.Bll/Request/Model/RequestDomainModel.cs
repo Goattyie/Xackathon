@@ -14,6 +14,7 @@ namespace Xackathon.Bll.Model
         public string Description { get; set; }
         public Source Source { get; set; }
         public int Rating { get; set; }
+        public string Email { get; set; }
         public int WatchCount { get; set; }
         public string CreatedAt { get; set; }
     }

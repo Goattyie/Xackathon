@@ -13,12 +13,22 @@ builder.Services.AddSwaggerGen(c =>
     var filePath = Path.Combine(System.AppContext.BaseDirectory, "documentation.xml");
     c.IncludeXmlComments(filePath);
 });
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.AllowAnyHeader()
+        .AllowAnyOrigin()
+        .AllowAnyMethod();
+    });
+});
 
 var connection = builder.Configuration.GetConnectionString("DefaultConnection");
 IoC.Register(builder.Services, connection);
 
 var app = builder.Build();
 app.UseSwagger();
+app.UseCors();
 app.UseExceptionHandler("/error");
 app.UseSwaggerUI(c => c.SwaggerEndpoint("v1/swagger.json", "Xackathon API"));
 

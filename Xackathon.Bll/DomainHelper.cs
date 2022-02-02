@@ -44,6 +44,7 @@ namespace Xackathon.Bll
                 Latitude = model.Latitude,
                 Longitude = model.Longitude,
                 Source = model.Source,
+                Email = model.Email,
                 Description = model.Description,
                 WatchCount = model.WatchCount,
                 Rating = model.Rating,
@@ -67,6 +68,7 @@ namespace Xackathon.Bll
                 Description = model.Description,
                 WatchCount = model.WatchCount,
                 Rating = model.Rating,
+                Email = model.Email,
                 ProblemCategories = model.ProblemCategories.ToProblemCategoryDomainArray(),
                 MediaContent = Auto.Mapper.Map<IEnumerable<MediaContentDomainModel>>(model.MediaContent),
             };

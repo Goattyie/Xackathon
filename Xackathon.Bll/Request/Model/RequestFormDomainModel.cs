@@ -16,6 +16,7 @@ namespace Xackathon.Bll.Model
         public IEnumerable<int> ProblemCategories { get; set; }
         public int WatchCount { get; set; }
         public string CreatedAt { get; set; }
+        public string Email { get; set; }
 
         public static explicit operator Request(RequestFormDomainModel form)
         {
@@ -29,6 +30,7 @@ namespace Xackathon.Bll.Model
             request.Description = form.Description;
             request.CreatedAt = form.CreatedAt.ToNullableDateTime();
             request.WatchCount = form.WatchCount;
+            request.Email = form.Email;
             request.MediaContent = Auto.Mapper.Map<IEnumerable<MediaContent>>(form.Content);
 
             return request;

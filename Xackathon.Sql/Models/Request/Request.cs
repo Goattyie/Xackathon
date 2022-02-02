@@ -12,6 +12,7 @@ namespace Xackathon.Dal.Models
         public string Description { get; set; }
         public Source Source { get; set; }
         public int Rating { get; set; }
+        public string Email { get; set; }
         public int WatchCount { get; set; }
         public DateTime? CreatedAt { get; set; }
         public Profile Profile { get; set; }
